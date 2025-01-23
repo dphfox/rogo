@@ -1,5 +1,6 @@
 <div align="center">
-    <a href="https://rojo.space"><img src="assets/brand_images/logo-512.png" alt="Rojo" height="217" /></a>
+    <h1>RoGo</h1>
+    <h3>a portable fork of the awesome <a href="https://rojo.space"><img src="assets/brand_images/logo-512.png" alt="Rojo" height="24"/></a> project</h3>
 </div>
 
 <div>&nbsp;</div>

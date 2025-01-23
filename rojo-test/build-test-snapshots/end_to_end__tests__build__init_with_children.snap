@@ -3,12 +3,17 @@ source: tests/tests/build.rs
 expression: contents
 ---
 <roblox version="4">
-  <Item class="ModuleScript" referent="0">
+  <Item class="Folder" referent="0">
     <Properties>
       <string name="Name">init_with_children</string>
-      <string name="Source">-- init.lua</string>
     </Properties>
     <Item class="ModuleScript" referent="1">
+      <Properties>
+        <string name="Name">init</string>
+        <string name="Source">-- init.lua</string>
+      </Properties>
+    </Item>
+    <Item class="ModuleScript" referent="2">
       <Properties>
         <string name="Name">other</string>
         <string name="Source">-- other.lua</string>

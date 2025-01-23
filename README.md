@@ -7,7 +7,12 @@
 
 <hr />
 
-RoGo is a small fork of Rojo implementing useful portability features introduced in later Luau versions, but which aren't adopted by the Rojo project. The aim is to foster complete drop-in interoperability between all Luau execution environments for large codebases built using Rojo, as well as community projects like <a href="https://elttob.uk/go/fusion">Fusion</a>.
+RoGo is a small fork of Rojo that strictly enforces useful portability features introduced in later Luau versions, but which aren't adopted by the Rojo project. The aim is to foster complete interoperability between all Luau execution environments for large codebases previously built using Rojo, as well as community projects like <a href="https://elttob.uk/go/fusion">Fusion</a>.
+
+Current list of enforced portability features:
+
+- Path stability
+	- RoGo completely unimplements promotion of files such as `init.luau` so that every module has a consistent path in all environments.
 
 Learn more about Rojo below!
 

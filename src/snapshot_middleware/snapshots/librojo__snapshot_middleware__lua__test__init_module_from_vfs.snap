@@ -9,10 +9,6 @@ metadata:
     Path: /root
   relevant_paths:
     - /root
-    - /root/init.meta.json
-    - /root/init.lua
-    - /root/init.server.lua
-    - /root/init.client.lua
   context:
     script_type: Class
 name: root

@@ -5,6 +5,14 @@
 
 <div>&nbsp;</div>
 
+<hr />
+
+RoGo is a small fork of Rojo implementing useful portability features introduced in later Luau versions, but which aren't adopted by the Rojo project. The aim is to foster complete drop-in interoperability between all Luau execution environments for large codebases built using Rojo, as well as community projects like <a href="https://elttob.uk/go/fusion">Fusion</a>.
+
+Learn more about Rojo below!
+
+<hr />
+
 <div align="center">
     <a href="https://github.com/rojo-rbx/rojo/actions"><img src="https://github.com/rojo-rbx/rojo/workflows/CI/badge.svg" alt="Actions status" /></a>
     <a href="https://crates.io/crates/rojo"><img src="https://img.shields.io/crates/v/rojo.svg?label=latest%20release" alt="Latest server version" /></a>

@@ -31,11 +31,11 @@ use crate::glob::Glob;
 use crate::snapshot::{InstanceContext, InstanceSnapshot, SyncRule};
 
 use self::{
-    csv::{snapshot_csv, snapshot_csv_init},
+    csv::snapshot_csv,
     dir::snapshot_dir,
     json::snapshot_json,
     json_model::snapshot_json_model,
-    lua::{snapshot_lua, snapshot_lua_init, ScriptType},
+    lua::{snapshot_lua, ScriptType},
     project::snapshot_project,
     rbxm::snapshot_rbxm,
     rbxmx::snapshot_rbxmx,
@@ -77,18 +77,6 @@ pub fn snapshot_from_vfs(
                             snapshot_project(context, vfs, &init_path, name)
                         }
 
-                        Middleware::ModuleScript => {
-                            snapshot_lua_init(context, vfs, &init_path, ScriptType::Module)
-                        }
-                        Middleware::ServerScript => {
-                            snapshot_lua_init(context, vfs, &init_path, ScriptType::Server)
-                        }
-                        Middleware::ClientScript => {
-                            snapshot_lua_init(context, vfs, &init_path, ScriptType::Client)
-                        }
-
-                        Middleware::Csv => snapshot_csv_init(context, vfs, &init_path),
-
                         _ => snapshot_dir(context, vfs, path),
                     };
                 }
@@ -98,18 +86,6 @@ pub fn snapshot_from_vfs(
             snapshot_dir(context, vfs, path)
         }
     } else {
-        let file_name = path
-            .file_name()
-            .and_then(|n| n.to_str())
-            .with_context(|| format!("file name of {} is invalid", path.display()))?;
-
-        // TODO: Is this even necessary anymore?
-        match file_name {
-            "init.server.luau" | "init.server.lua" | "init.client.luau" | "init.client.lua"
-            | "init.luau" | "init.lua" | "init.csv" => return Ok(None),
-            _ => {}
-        }
-
         snapshot_from_path(context, vfs, path)
     }
 }
@@ -123,41 +99,6 @@ fn get_init_path<P: AsRef<Path>>(vfs: &Vfs, dir: P) -> anyhow::Result<Option<Pat
     let project_path = path.join("default.project.json");
     if vfs.metadata(&project_path).with_not_found()?.is_some() {
         return Ok(Some(project_path));
-    }
-
-    let init_path = path.join("init.luau");
-    if vfs.metadata(&init_path).with_not_found()?.is_some() {
-        return Ok(Some(init_path));
-    }
-
-    let init_path = path.join("init.lua");
-    if vfs.metadata(&init_path).with_not_found()?.is_some() {
-        return Ok(Some(init_path));
-    }
-
-    let init_path = path.join("init.server.luau");
-    if vfs.metadata(&init_path).with_not_found()?.is_some() {
-        return Ok(Some(init_path));
-    }
-
-    let init_path = path.join("init.server.lua");
-    if vfs.metadata(&init_path).with_not_found()?.is_some() {
-        return Ok(Some(init_path));
-    }
-
-    let init_path = path.join("init.client.luau");
-    if vfs.metadata(&init_path).with_not_found()?.is_some() {
-        return Ok(Some(init_path));
-    }
-
-    let init_path = path.join("init.client.lua");
-    if vfs.metadata(&init_path).with_not_found()?.is_some() {
-        return Ok(Some(init_path));
-    }
-
-    let init_path = path.join("init.csv");
-    if vfs.metadata(&init_path).with_not_found()?.is_some() {
-        return Ok(Some(init_path));
     }
 
     Ok(None)
